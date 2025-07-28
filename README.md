@@ -276,14 +276,75 @@ The [`paper_results.ipynb`](notebooks/paper_results.ipynb) notebook provides com
    - Comparative analysis between SEC and WikiDB datasets
 
 4. **Error Analysis & Data Filtering**
-   - Precision-based subset extraction for error investigation (as an example. Any metic and be used to analyze this)
-   - Threshold analysis to determine optimal data retention rates
-   - Comprehensive quality assessment across different filtering levels
+   - **Precision-based subset extraction** for error investigation (temporal precision used as example - any metric can be substituted)
+   - **Threshold analysis** to determine optimal data retention rates at different quality levels
+   - **Filtered dataset creation** - automatically generates high-quality subsets based on your chosen metrics
+   - **Comprehensive quality assessment** across different filtering levels with detailed statistics
+
+5. **Dataset Subset Generation & Quality Filtering**
+   - **`PrecisionSubsetExtractor` Class**: Automated tool for creating filtered datasets based on any evaluation metric
+   - **Threshold-Based Filtering**: Analyzes data retention rates at multiple precision thresholds (1.0, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7)
+   - **Quality-Performance Trade-offs**: Visualizes how filtering affects both data volume and evaluation metrics
+   - **Customizable Metrics**: While temporal precision is used as the default example, you can filter on:
+     - Numeric precision/recall/F1 scores
+     - Any LLM judge scores (factuality, hallucination, coherence)
+     - Key-value extraction accuracy metrics
+     - Custom evaluation metrics
+   - **Automated Subset Creation**: Generates filtered versions of your datasets with associated metadata
+   - **Statistical Analysis**: Provides detailed before/after comparisons showing improvement gains
 
 **Typical Workflow:**
 1. Run all evaluation notebooks first ([`llm_judge_evaluation.ipynb`](notebooks/llm_judge_evaluation.ipynb), [`kv_extraction_baseline.ipynb`](notebooks/kv_extraction_baseline.ipynb), [`unit_time_evaluation.ipynb`](notebooks/unit_time_evaluation.ipynb))
 2. Execute [`paper_results.ipynb`](notebooks/paper_results.ipynb) to aggregate and analyze results
 3. Use generated tables and visualizations directly in research publications
+4. **Optional**: Create filtered subsets for higher-quality datasets using the built-in filtering tools
+
+### Advanced Dataset Filtering & Subset Creation
+
+The [`paper_results.ipynb`](notebooks/paper_results.ipynb) notebook includes powerful filtering capabilities that allow you to create higher-quality dataset subsets based on any evaluation metric.
+
+**Why Filter Datasets?**
+- **Improve data quality** by removing low-performing samples
+- **Focus analysis** on high-quality examples
+- **Create benchmark subsets** with known quality thresholds
+- **Investigate error patterns** by analyzing filtered-out samples
+- **Balance dataset size vs. quality** for specific use cases
+
+**Filtering Capabilities:**
+
+```python
+# Example: Create subsets based on temporal precision (>= 0.95 threshold)
+extractor = PrecisionSubsetExtractor(meta_csv_path=meta_csv_path, output_base_path=results_dir)
+result = extractor.create_subset_dataset(
+    dataset_name="your_dataset_name",
+    precision_threshold=0.95,
+    eval_column="unit_time_csv_path_your_model",
+    metric_column="tmp_precision"  # Can be any metric column
+)
+```
+
+**Customizable Filtering Metrics:**
+- **Temporal Accuracy**: `tmp_precision`, `tmp_recall`, `tmp_f1`
+- **Numeric Accuracy**: `num_precision`, `num_recall`, `num_f1`
+- **LLM Judge Scores**: `factuality_score`, `hallucination_score`, `coherence_score`
+- **KV Extraction**: Any precision/recall metric from key-value extraction
+- **Custom Metrics**: Any column in your evaluation CSV files
+
+**What You Get:**
+- **Filtered CSV files** with only high-quality samples
+- **Metadata files** documenting the filtering process
+- **Statistical reports** showing quality improvements
+- **Before/after comparisons** with detailed metrics
+- **Retention analysis** showing data volume vs. quality trade-offs
+
+**Example Use Cases:**
+1. **High-Quality Benchmark Creation**: Filter to keep only samples with >95% accuracy
+2. **Error Analysis**: Create subsets of problematic samples for detailed investigation
+3. **Model Comparison**: Generate clean test sets for fair model evaluation
+4. **Data Quality Assessment**: Analyze what percentage of your data meets quality thresholds
+
+**Threshold Analysis Results:**
+The notebook automatically analyzes multiple thresholds (1.0, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7) to help you choose optimal filtering levels based on your quality vs. volume requirements.
 
 ## Dataset Integration
 
