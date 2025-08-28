@@ -5,6 +5,9 @@
 
 > **Paper** *StructText: A Synthetic Table-to-Text Approach for Benchmark Generation with Multi-Dimensional Evaluation* (TaDA @ VLDB 2025)
 
+## Resources: 
+- Paper: https://arxiv.org/abs/2507.21340v1
+- Dataset: https://huggingface.co/datasets/ibm-research/struct-text
 
 Large language models can verbalise structured data with impressive factual fidelity, yet the resulting narratives often bury key facts in prose that defeats downstream machine extraction. **StructText** bridges this gap by building a benchmark that starts with *trusted tables* and scores every generated passage on four dimensions:
 
