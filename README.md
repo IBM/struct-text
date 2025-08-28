@@ -9,6 +9,7 @@
 - Paper: https://arxiv.org/abs/2507.21340v1
 - Dataset: https://huggingface.co/datasets/ibm-research/struct-text
 
+
 Large language models can verbalise structured data with impressive factual fidelity, yet the resulting narratives often bury key facts in prose that defeats downstream machine extraction. **StructText** bridges this gap by building a benchmark that starts with *trusted tables* and scores every generated passage on four dimensions:
 
 * **Factuality** – does the text faithfully reflect the source cells?
@@ -34,6 +35,10 @@ The extractor is evaluated with both exact-match and semantic-similarity scoring
 ---
 
 ## End-to-end flow
+
+<img width="1495" height="841" alt="StructText" src="https://github.com/user-attachments/assets/1b2c3bd6-f54f-46b4-a490-f1f8df72ec31" />
+
+---
 
 ```mermaid
 flowchart LR
