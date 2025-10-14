@@ -2,6 +2,7 @@
 
 [![Dataset – struct-text](https://img.shields.io/badge/HF_dataset-struct--text-blue)](https://huggingface.co/datasets/ibm-research/struct-text)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/IBM/struct-text)
 
 > **Paper** *StructText: A Synthetic Table-to-Text Approach for Benchmark Generation with Multi-Dimensional Evaluation* (TaDA @ VLDB 2025)
 
